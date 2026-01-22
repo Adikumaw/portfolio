@@ -69,7 +69,7 @@ const App: React.FC = () => {
     const smoothScroll = () => {
       // Get the current scroll target
       const diff = Math.abs(targetScroll - currentScroll);
-      
+
       if (diff > 0.5) {
         currentScroll = lerp(currentScroll, targetScroll, ease);
         container.scrollTop = currentScroll;
@@ -101,7 +101,7 @@ const App: React.FC = () => {
       const anchor = target.closest('a[href^="#"]');
       if (anchor) {
         e.preventDefault();
-        const href = anchor.getAttribute('href');
+        const href = anchor.getAttribute("href");
         if (href) {
           const element = document.querySelector(href);
           if (element) {
@@ -117,21 +117,21 @@ const App: React.FC = () => {
     targetScroll = container.scrollTop;
     rafId = requestAnimationFrame(smoothScroll);
 
-    container.addEventListener('wheel', handleWheel, { passive: false });
-    container.addEventListener('scroll', handleScroll);
-    document.addEventListener('click', handleAnchorClick);
+    container.addEventListener("wheel", handleWheel, { passive: false });
+    container.addEventListener("scroll", handleScroll);
+    document.addEventListener("click", handleAnchorClick);
 
     // Handle touch devices (use native scroll)
-    const isTouchDevice = 'ontouchstart' in window;
+    const isTouchDevice = "ontouchstart" in window;
     if (isTouchDevice) {
-      container.removeEventListener('wheel', handleWheel);
+      container.removeEventListener("wheel", handleWheel);
     }
 
     return () => {
       cancelAnimationFrame(rafId);
-      container.removeEventListener('wheel', handleWheel);
-      container.removeEventListener('scroll', handleScroll);
-      document.removeEventListener('click', handleAnchorClick);
+      container.removeEventListener("wheel", handleWheel);
+      container.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("click", handleAnchorClick);
     };
   }, []);
 

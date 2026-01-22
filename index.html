@@ -79,38 +79,8 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow: hidden;
-      cursor: none;
     }
 
-    /* Custom cursor */
-    .custom-cursor {
-      width: 20px;
-      height: 20px;
-      border: 2px solid rgba(59, 130, 246, 0.8);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.15s ease-out, background-color 0.15s ease-out, border-color 0.15s ease-out;
-      transform: translate(-50%, -50%);
-    }
-
-    .custom-cursor-dot {
-      width: 6px;
-      height: 6px;
-      background-color: rgba(59, 130, 246, 1);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-    }
-
-    .custom-cursor.hover {
-      transform: translate(-50%, -50%) scale(1.5);
-      background-color: rgba(59, 130, 246, 0.1);
-      border-color: rgba(59, 130, 246, 1);
-    }
 
     /* Hide scrollbar for Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar,
@@ -138,10 +108,10 @@
 
     /* Glass morphic card effect - Apple-style frosted glass */
     .glass-card {
-      background: rgba(20, 20, 20, 0.6);
+      background: rgba(10, 10, 10, 0.6);
       backdrop-filter: blur(40px) saturate(180%);
       -webkit-backdrop-filter: blur(40px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      /* border: 1px solid rgba(255, 255, 255, 0.1); */
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
 
@@ -166,10 +136,7 @@
     }
 
     /* Link and button cursor styles */
-    a,
-    button {
-      cursor: none;
-    }
+
 
     /* Fade-in animation on scroll */
     .fade-in-section {

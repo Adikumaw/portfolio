@@ -9,16 +9,16 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    "inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-500/50 disabled:opacity-50 disabled:cursor-not-allowed tracking-wide rounded-lg";
+    "inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed tracking-wide rounded-lg";
 
   const variants = {
     // Primary: Cream/White with blue accent on hover
     primary:
-      "bg-cream-100 text-black hover:bg-white hover:shadow-[0_0_20px_rgba(59,130,239,0.3)] border border-cream-200",
+      "bg-cream-100 text-black hover:bg-cream-50 hover:shadow-[0_0_20px_rgba(59,130,239,0.3)] border border-cream-100",
 
     // Outline: Purple border, cream text
     outline:
-      "border border-accent-500/50 text-cream-200 bg-transparent hover:border-accent-400 hover:text-cream-100 hover:bg-accent-500/10",
+      "border border-accent-400/50 text-cream-200 bg-transparent hover:border-accent-500 hover:text-cream-100 hover:bg-accent-500/10",
 
     // Ghost: Simple text link
     ghost:

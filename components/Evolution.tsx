@@ -192,10 +192,10 @@ const Evolution: React.FC = () => {
                 {/* Timeline Node - Glowing Star Dot */}
                 <div className="flex flex-col items-center flex-shrink-0 w-8 md:w-10">
                   <div
-                    className={`relative w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center transition-all duration-500 ${
+                    className={`relative mt-1 w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center transition-all duration-500 ${
                       isActive
                         ? "bg-white shadow-[0_0_10px_rgba(255,255,255,0.8),0_0_20px_rgba(255,255,255,0.5),0_0_40px_rgba(59,130,246,0.4)]"
-                        : "bg-gray-600/50 border border-white/20"
+                        : "bg-white/0"
                     }`}
                   >
                     {/* Inner glow core */}

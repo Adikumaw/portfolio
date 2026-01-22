@@ -11,10 +11,10 @@ const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Brand & Copyright */}
           <div className="flex flex-col items-center md:items-start gap-2">
-            <span className="text-cream font-bold text-lg tracking-tighter">
+            <span className="text-cream-100 font-bold text-lg tracking-tighter">
               Aditya.
             </span>
-            <span className="text-cream/40 text-sm font-mono tracking-wide">
+            <span className="text-cream-100/40 text-sm font-mono tracking-wide">
               © {currentYear} · All rights reserved
             </span>
           </div>
@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
           <div className="flex items-center gap-6">
             <a
               href="mailto:kumawataditya105@gmail.com"
-              className="flex items-center gap-2 text-cream/50 hover:text-accent transition-colors duration-300 text-sm"
+              className="flex items-center gap-2 text-cream-100/50 hover:text-accent-400 transition-colors duration-300 text-sm"
             >
               <Mail className="w-4 h-4" />
               <span className="hidden sm:inline">Email</span>
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-cream/50 hover:text-accent transition-colors duration-300 text-sm"
+              className="flex items-center gap-2 text-cream-100/50 hover:text-accent-400 transition-colors duration-300 text-sm"
             >
               <Github className="w-4 h-4" />
               <span className="hidden sm:inline">GitHub</span>
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-cream/50 hover:text-accent transition-colors duration-300 text-sm"
+              className="flex items-center gap-2 text-cream-100/50 hover:text-accent-400 transition-colors duration-300 text-sm"
             >
               <Linkedin className="w-4 h-4" />
               <span className="hidden sm:inline">LinkedIn</span>
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-cream/50 hover:text-accent transition-colors duration-300 text-sm"
+              className="flex items-center gap-2 text-cream-100/50 hover:text-accent-400 transition-colors duration-300 text-sm"
             >
               <FileText className="w-4 h-4" />
               <span className="hidden sm:inline">Resume</span>
@@ -69,8 +69,8 @@ const Footer: React.FC = () => {
 
         {/* Tagline */}
         <div className="mt-8 pt-8 border-t border-white/5 flex justify-center">
-          <p className="text-cream/30 text-xs font-mono tracking-wider flex items-center gap-2">
-            Designed & Built with <Heart className="w-3 h-3 text-accent/50" />{" "}
+          <p className="text-cream-100/30 text-xs font-mono tracking-wider flex items-center gap-2">
+            Designed & Built with <Heart className="w-3 h-3 text-accent-500/50" />{" "}
             using React & Tailwind
           </p>
         </div>

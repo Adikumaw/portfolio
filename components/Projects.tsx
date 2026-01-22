@@ -210,6 +210,7 @@ const Projects: React.FC = () => {
 
   return (
     <>
+    
       <section
         id="projects"
         className="min-h-screen pt-32 pb-24 border-t border-white/5"
@@ -217,15 +218,15 @@ const Projects: React.FC = () => {
         {/* Section Header */}
         <div className="px-6 sm:px-12 lg:px-24 max-w-[1400px] mx-auto mb-16">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-2 h-2 rounded-full bg-accent shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent">
+            <div className="w-2 h-2 rounded-full bg-accent-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-400">
               Featured Work
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cream mb-6 tracking-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cream-100 mb-6 tracking-tight">
             Projects
           </h2>
-          <p className="text-cream/60 font-light text-lg md:text-xl max-w-2xl leading-relaxed">
+          <p className="text-cream-500/60 font-light text-lg md:text-xl max-w-2xl leading-relaxed">
             Engineering solutions designed for scale, performance, and
             reliability.
           </p>
