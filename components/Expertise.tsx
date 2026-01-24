@@ -21,7 +21,8 @@ const SkillBlock: React.FC<SkillBlockProps> = ({
 
   return (
     <div
-      className={`glass-card group relative rounded-2xl p-6 md:p-8 hover:border-white/20 hover:shadow-[0_0_50px_rgba(255,255,255,0.08)] transition-all duration-500 overflow-hidden ${fullWidth ? "md:col-span-2" : ""}`}
+      className={`glass-card group relative rounded-2xl p-6 md:p-8 hover:border-white/20 transition-all duration-500 overflow-hidden ${fullWidth ? "md:col-span-2" : ""}`}
+      style={{ transitionProperty: "all, box-shadow" }}
     >
       {/* Glow Effect - White */}
       <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -48,16 +49,18 @@ const SkillBlock: React.FC<SkillBlockProps> = ({
       {/* Skills Grid - Smooth Expand */}
       <div
         className={`grid ${fullWidth ? "grid-cols-2 md:grid-cols-3" : "grid-cols-1 sm:grid-cols-2"} gap-y-3 gap-x-6 relative z-10 overflow-hidden transition-all duration-500 ease-out`}
-        style={{ 
-          maxHeight: isExpanded ? `${skills.length * 32}px` : `${Math.min(skills.length, 4) * 32}px`,
+        style={{
+          maxHeight: isExpanded
+            ? `${skills.length * 32}px`
+            : `${Math.min(skills.length, 4) * 32}px`,
         }}
       >
         {skills.map((skill, idx) => (
           <div
             key={idx}
-            className={`flex items-center gap-3 text-cream-500/50 group-hover:text-cream-500/70 transition-all duration-300 ${idx >= 4 && !isExpanded ? 'opacity-0' : 'opacity-100'}`}
+            className={`flex items-center gap-3 text-cream-500/50 group-hover:text-cream-500/70 transition-all duration-300 ${idx >= 4 && !isExpanded ? "opacity-0" : "opacity-100"}`}
             style={{
-              transitionDelay: idx >= 4 ? `${(idx - 4) * 50}ms` : '0ms'
+              transitionDelay: idx >= 4 ? `${(idx - 4) * 50}ms` : "0ms",
             }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-accent-500/50 group-hover:bg-accent-400 transition-colors duration-300 flex-shrink-0" />

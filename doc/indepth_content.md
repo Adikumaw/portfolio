@@ -59,15 +59,6 @@ I design trading infrastructure, real-time automation systems, and data-driven b
 
 ---
 
-### Action Buttons
-
-[ View Projects ]  ← Primary (solid accent color)
-
-[ GitHub ]  ← Outline style
-[ Resume ]  ← Text or subtle button
-
----
-
 # 🧩 Optional Micro-Detail (Very Subtle)
 
 Under your name, extremely subtle:
@@ -237,30 +228,19 @@ Structure:
 Project Title
 Tech stack (small muted line)
 Short one-line positioning
-↓
+overall points about project.
+
+in view details show:
+Project Title
+Tech stack (small muted line)
+Short one-line positioning
+
 Two-column layout on desktop:
 
 Left: System Architecture / Capabilities
 Right: Engineering Highlights / Depth
 
 On mobile → stacked cleanly.
-
----
-
-### Design Rules
-
-* Big typography for titles
-* Soft shadow cards
-* No bright colors
-* Accent only on tech stack
-
----
-
-### Interaction
-
-* Slight elevation on hover
-* “View Details” expands extra technical breakdown
-* GitHub link if public
 
 ---
 
