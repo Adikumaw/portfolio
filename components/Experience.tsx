@@ -130,7 +130,7 @@ const Experience: React.FC = () => {
   return (
     <section
       id="experience"
-      className="min-h-screen px-6 sm:px-12 lg:px-24 max-w-[1400px] mx-auto pt-32 pb-24 border-t border-white/5"
+      className="min-h-screen px-6 sm:px-12 lg:px-24 2xl:px-32 max-w-[1400px] 2xl:max-w-[1600px] mx-auto pt-32 pb-24 border-t border-white/5"
     >
       {/* Section Header */}
       <div className="mb-16">

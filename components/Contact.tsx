@@ -5,7 +5,7 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="min-h-[70vh] px-6 sm:px-12 lg:px-24 max-w-[1400px] mx-auto pt-32 pb-32 border-t border-white/5 flex flex-col items-center justify-center text-center"
+      className="min-h-[70vh] px-6 sm:px-12 lg:px-24 2xl:px-32 max-w-[1400px] 2xl:max-w-[1600px] mx-auto pt-32 pb-32 border-t border-white/5 flex flex-col items-center justify-center text-center"
     >
       <div className="max-w-3xl">
         {/* Section Label */}
@@ -74,4 +74,3 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
-

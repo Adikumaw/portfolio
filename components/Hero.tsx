@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-24 max-w-[1400px] mx-auto pt-20"
+      className="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-24 2xl:px-32 max-w-[1400px] 2xl:max-w-[1600px] mx-auto pt-20"
     >
       <div className="max-w-5xl w-full">
         {/* Name */}

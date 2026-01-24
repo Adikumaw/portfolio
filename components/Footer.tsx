@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="w-full py-12 bg-gradient-to-t from-gray-950 to-transparent border-t border-white/5">
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-24">
+      <div className="max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-24 2xl:px-32">
         {/* Main Footer Content */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Brand & Copyright */}
@@ -70,8 +70,9 @@ const Footer: React.FC = () => {
         {/* Tagline */}
         <div className="mt-8 pt-8 border-t border-white/5 flex justify-center">
           <p className="text-cream-100/30 text-xs font-mono tracking-wider flex items-center gap-2">
-            Designed & Built with <Heart className="w-3 h-3 text-accent-500/50" />{" "}
-            using React & Tailwind
+            Designed & Built with{" "}
+            <Heart className="w-3 h-3 text-accent-500/50" /> using React &
+            Tailwind
           </p>
         </div>
       </div>
