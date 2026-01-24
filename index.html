@@ -247,21 +247,21 @@
       border-radius: 50%;
       background: #00F5FF;
     }
-    
+
     .custom-cursor.hover .cursor-line-bottom {
       bottom: -22px;
       width: 3px;
       border-radius: 50%;
       background: #00F5FF;
     }
-    
+
     .custom-cursor.hover .cursor-line-left {
       left: -22px;
       height: 3px;
       border-radius: 50%;
       background: rgba(59, 130, 246, 1);
     }
-    
+
     .custom-cursor.hover .cursor-line-right {
       right: -22px;
       height: 3px;
@@ -381,12 +381,16 @@
 
     /* Light theme overrides - Frosted ice glass aesthetic */
     html.light body {
-      background-color: #f0f4f8;
+      background-color: #f9fafb;
+      background-image:
+        radial-gradient(ellipse 100% 80% at 50% -30%, rgba(59, 130, 246, 0.05), transparent 60%),
+        radial-gradient(ellipse 80% 60% at 100% 80%, rgba(99, 102, 241, 0.04), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 0% 100%, rgba(139, 92, 246, 0.03), transparent 60%);
       color: #1e293b;
     }
 
     html.light .bg-black {
-      background-color: #f0f4f8 !important;
+      background-color: #f8fafc !important;
     }
 
     /* Primary text colors - dark slate for readability */
@@ -519,12 +523,23 @@
     }
 
     /* Custom cursor for light mode */
-    html.light .custom-cursor {
-      border-color: rgba(37, 99, 235, 1);
+    html.light .custom-cursor .cursor-line {
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    html.light .custom-cursor.hover .cursor-line {
+      background: rgba(37, 99, 235, 1);
     }
 
     html.light .custom-cursor-dot {
-      background-color: rgba(37, 99, 235, 1);
+      background-color: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 10px rgba(15, 23, 42, 0.3);
+    }
+
+    html.light .custom-cursor-dot.grabbing {
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(37, 99, 235, 0.6);
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
     }
 
     /* Selection highlight */
@@ -597,14 +612,19 @@
 
     /* Modal backdrop */
     html.light .bg-black\/80[class*="fixed"] {
-      background-color: rgba(15, 23, 42, 0.7) !important;
+      background-color: rgba(15, 23, 42, 0.5) !important;
     }
 
-    /* Modal/popup glass card - dark frost for readability */
+    html.light .bg-black\/60 {
+      background-color: rgba(15, 23, 42, 0.4) !important;
+    }
+
+    /* Modal/popup glass card - calmer dark frost for readability */
     html.light .fixed .glass-card,
     html.light [style*="z-index"][style*="9999"] .glass-card {
-      background: rgba(30, 41, 59, 0.92) !important;
-      border-color: rgba(71, 85, 105, 0.5) !important;
+      background: rgba(30, 41, 59, 0.88) !important;
+      border-color: rgba(100, 116, 139, 0.4) !important;
+      box-shadow: 0 25px 50px rgba(15, 23, 42, 0.25), 0 10px 20px rgba(15, 23, 42, 0.15) !important;
     }
 
     /* Modal text - light text on dark modal */
@@ -683,6 +703,96 @@
     html.light .bg-white\/5:hover,
     html.light .bg-white\/10:hover {
       background-color: rgba(15, 23, 42, 0.12) !important;
+    }
+
+    /* Button and link hover colors in light mode */
+    html.light .hover\:text-accent-400:hover {
+      color: #2563eb !important;
+    }
+
+    /* Ensure only interactive elements get hover color, not text content */
+    html.light a.flex:hover,
+    html.light button:hover {
+      color: #2563eb !important;
+    }
+
+    /* Prevent body text from inheriting hover colors */
+    html.light p,
+    html.light span:not(.hidden),
+    html.light li {
+      transition: none !important;
+    }
+
+    html.light p:hover,
+    html.light li:hover {
+      color: inherit !important;
+    }
+
+    html.light .text-cream-500\/50:hover,
+    html.light .text-cream-500\/60:hover {
+      color: #2563eb !important;
+    }
+
+    /* Footer link hover in light mode - icon and text same color */
+    html.light footer a:hover,
+    html.light footer a:hover *,
+    html.light footer button:hover,
+    html.light footer button:hover * {
+      color: #93c5fd !important;
+    }
+
+    /* Private repo styling in light mode */
+    html.light .text-cream-500\/30 {
+      color: #94a3b8 !important;
+    }
+
+    /* Remove any text shadows and prevent glow in light mode */
+    html.light .text-cream-500\/50,
+    html.light .text-cream-500\/60,
+    html.light .text-cream-500\/70,
+    html.light .text-cream-100\/50,
+    html.light .text-cream-100\/30,
+    html.light .text-cream-100\/40 {
+      text-shadow: none !important;
+    }
+
+    /* Ensure text content doesn't change color on hover in light mode */
+    html.light p.text-cream-500\/60:hover,
+    html.light p.text-cream-500\/50:hover,
+    html.light span.text-cream-500\/50:hover,
+    html.light ul li:hover,
+    html.light ol li:hover {
+      color: inherit !important;
+      text-shadow: none !important;
+    }
+
+    /* Evolution timeline glow circle in light mode */
+    html.light .shadow-\[0_0_10px_rgba\(59\,130\,246\,0\.5\)\] {
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.4) !important;
+    }
+
+    html.light .shadow-\[0_0_15px_rgba\(255\,255\,255\,0\.2\)\] {
+      box-shadow: 0 0 15px rgba(37, 99, 235, 0.25) !important;
+    }
+
+    /* Accent glow backgrounds in light mode */
+    html.light .bg-accent-500 {
+      background-color: #2563eb !important;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.5) !important;
+    }
+
+    /* Modal action buttons in light mode */
+    html.light .fixed .glass-card button:hover {
+      color: #93c5fd !important;
+    }
+
+    html.light .fixed .glass-card .text-cream-500\/50,
+    html.light .fixed .glass-card .text-cream-500\/30 {
+      color: rgba(203, 213, 225, 0.7) !important;
+    }
+
+    html.light .fixed .glass-card .text-cream-500\/50:hover {
+      color: #93c5fd !important;
     }
   </style>
   <script type="importmap">
