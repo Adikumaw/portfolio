@@ -437,36 +437,6 @@ Building intelligent backend systems that combine automation reliability with ma
 
 ---
 
-# 🎨 UI Direction for Timeline Section
-
-Now, very important — how this should look visually.
-
-### Layout: Editorial Vertical Timeline
-
-Left side:
-A thin vertical line with subtle dots marking years.
-
-Right side:
-Content blocks with:
-
-Year (small uppercase, muted)
-Section Title (bold)
-Description (tight paragraphs)
-
-No big paragraphs.
-Plenty of whitespace.
-No loud colors.
-
----
-
-### Animation (Subtle)
-
-* Vertical line draws as user scrolls.
-* Each year block fades in from right.
-* No sliding chaos.
-
----
-
 # 🔹 SECTION 4: Capabilities
 
 ## Technical Expertise
