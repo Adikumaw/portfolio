@@ -18,18 +18,21 @@ This is a modern, interactive portfolio website for Aditya Kumawat, showcasing e
 
 ## 🏗️ Structure & Sections
 
-- **Hero:** Name, role, location, and positioning statement.
-- **Projects:** Carousel of major projects with tech stack, highlights, and architecture details.
-- **Evolution:** Timeline of technical growth, skills, and milestones from 2022–2026.
-- **Expertise:** Capabilities across backend, trading, AI/data, infrastructure, and performance.
-- **Experience:** Career history with technical details for each role/internship.
-- **Contact:** Email, social links, and location.
+- **Data-Driven Content:** All site content (bio, projects, skills, experience, links, etc.) is managed via `/data/content.json` for easy updates and localization.
+- **Hero:** Name, role, location, and positioning statement (from JSON).
+- **Projects:** Carousel of major projects, each with GitHub links (public or private), tech stack, highlights, and architecture details. Private repos show a disabled button with tooltip.
+- **Evolution:** Timeline of technical growth, skills, and milestones (from JSON).
+- **Expertise:** Capabilities across backend, trading, AI/data, infrastructure, and performance (from JSON).
+- **Experience:** Career history with technical details for each role/internship (from JSON).
+- **Contact:** Email, social links, and location (from JSON).
 - **Footer:** Copyright, quick links, and tech credits.
 
 ---
 
 ## 🚀 Features
 
+- **JSON-Driven Content:** All portfolio data is loaded from `/data/content.json` for simple content management.
+- **Private/Public GitHub Links:** Each project card shows a GitHub button. If the repo is private, the button is disabled and shows a tooltip.
 - **Custom Cursor & Glassmorphic Cards:** Interactive UI with mouse tracking and frosted glass effects.
 - **Smooth Scrolling:** Lenis-style smooth scroll for a premium feel.
 - **Dark/Light Theme Toggle:** Seamless theme switching with full style overrides.
@@ -37,7 +40,7 @@ This is a modern, interactive portfolio website for Aditya Kumawat, showcasing e
 - **Responsive Design:** Fully mobile-friendly and accessible.
 - **Project Carousel:** Auto-advancing, draggable, and expandable project cards.
 - **Detailed Timeline:** Visual evolution of skills and experience.
-- **Contact & Socials:** Direct email, GitHub, LinkedIn, and resume download.
+- **Contact & Socials:** Direct email, GitHub, LinkedIn, and resume download (resume link from JSON, works on GitHub Pages).
 
 ---
 
@@ -55,6 +58,10 @@ This is a modern, interactive portfolio website for Aditya Kumawat, showcasing e
 ```
 ├── App.tsx                # Main app layout and logic
 ├── components/            # All major UI sections (Hero, Projects, Evolution, etc.)
+├── data/
+│   └── content.json       # All portfolio content (bio, projects, skills, links, etc.)
+├── public/
+│   └── resume.pdf         # Resume file (linked from JSON)
 ├── index.html             # HTML template with Tailwind and custom styles
 ├── index.tsx              # React entry point
 ├── package.json           # Scripts and dependencies
@@ -86,6 +93,12 @@ This is a modern, interactive portfolio website for Aditya Kumawat, showcasing e
    ```bash
    npm run deploy
    ```
+
+**Content Management:**
+
+- Edit all portfolio content in `/data/content.json` (bio, projects, skills, experience, links, resume, etc.).
+- For private GitHub projects, set `"github": { "url": "", "private": true }` in the JSON.
+- Resume link should be just the filename (e.g., `"resume": "resume.pdf"`).
 
 ---
 
