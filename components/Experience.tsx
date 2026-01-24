@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown, Briefcase, Calendar } from "lucide-react";
+import content from "../data/content.json";
 
 interface DetailSection {
   title: string;
@@ -14,118 +15,11 @@ interface ExperienceItem {
   details: DetailSection[];
 }
 
+const experiences: ExperienceItem[] = content.experience;
+const sectionContent = content.sections.experience;
+
 const Experience: React.FC = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  const experiences: ExperienceItem[] = [
-    {
-      company: "Trade Amplification",
-      role: "Trading Systems Developer",
-      duration: "Aug 2024 – Present",
-      summary: [
-        "Built automated trading systems using MQL4/MQL5",
-        "Developed real-time signal broadcasting infrastructure",
-        "Designed backend services using Java, Spring Boot, and Python",
-      ],
-      details: [
-        {
-          title: "Trading Automation",
-          items: [
-            "Designed Elastic DCA logic with dynamic recovery models",
-            "Implemented execution control using MqlTradeRequest / MqlTradeResult",
-            "Optimized trade management under live market latency conditions",
-          ],
-        },
-        {
-          title: "Signal Infrastructure",
-          items: [
-            "Built Telegram signal distribution bots",
-            "Designed subscription validation systems",
-            "Implemented WebSocket-based broadcasting",
-          ],
-        },
-        {
-          title: "Backend Systems",
-          items: [
-            "Built Spring Boot services for automation workflows",
-            "Integrated MySQL-based persistence layers",
-            "Developed project-based paid system architecture",
-          ],
-        },
-      ],
-    },
-    {
-      company: "Qubitron Labs",
-      role: "AI Research & Data Engineering Intern",
-      duration: "Sept 2025 – Jan 2026",
-      summary: [
-        "Designed data pipelines for trading AI experimentation",
-        "Engineered large-scale feature extraction workflows",
-        "Conducted research on model training and fine-tuning workflows",
-      ],
-      details: [
-        {
-          title: "Data Engineering",
-          items: [
-            "Processed ~57 crore OHLC records",
-            "Engineered feature pipelines (TA-Lib, Custom S/R)",
-            "Implemented close-relative scaling normalization",
-          ],
-        },
-        {
-          title: "Model Research",
-          items: [
-            "Trained Decision Tree models for strategy discovery",
-            "Migrated experiments to XGBoost for generalization",
-            "Designed level-based trade probability pipeline",
-          ],
-        },
-        {
-          title: "Vision Model Fine-Tuning",
-          items: [
-            "Prepared 27GB chart image dataset",
-            "Researched Qwen 3VL fine-tuning process",
-            "Designed dataset formatting for GPU-based training",
-          ],
-        },
-      ],
-    },
-    {
-      company: "WorinWell",
-      role: "Java Spring Boot Intern",
-      duration: "May 2024 – July 2024",
-      summary: [
-        "Built Employee Management System",
-        "Developed dynamic website using Spring Boot & Bootstrap",
-        "Implemented REST APIs with database integration",
-      ],
-      details: [
-        {
-          title: "Backend Architecture",
-          items: [
-            "Designed scalable REST endpoints",
-            "Implemented clean MVC architecture",
-            "Optimized API response times",
-          ],
-        },
-        {
-          title: "Database Integration",
-          items: [
-            "Implemented MySQL schema with Hibernate ORM",
-            "Designed efficient queries",
-            "Managed database migrations",
-          ],
-        },
-        {
-          title: "Security & Access",
-          items: [
-            "Integrated basic authentication for admin panels",
-            "Implemented role-based access control (RBAC)",
-          ],
-        },
-      ],
-    },
-  ];
 
   return (
     <section
@@ -137,14 +31,14 @@ const Experience: React.FC = () => {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-2 h-2 rounded-full bg-accent-500 shadow-[0_0_10px_rgba(59,130,239,0.5)]"></div>
           <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-400">
-            Career
+            {sectionContent.label}
           </span>
         </div>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cream-100 mb-6 tracking-tight">
-          Experience
+          {sectionContent.title}
         </h2>
         <p className="text-cream-500/60 font-light text-lg md:text-xl max-w-2xl leading-relaxed">
-          A track record of engineering scalable systems and research pipelines.
+          {sectionContent.description}
         </p>
       </div>
 

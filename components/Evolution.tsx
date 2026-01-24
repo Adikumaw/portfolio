@@ -1,159 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
+import content from "../data/content.json";
 
 interface TimelineData {
   year: string;
   title: string;
-  subtitle?: string;
+  subtitle?: string | null;
   description: string;
   points: string[];
   tech: string[];
 }
+
+const history: TimelineData[] = content.evolution;
+const sectionContent = content.sections.evolution;
 
 const Evolution: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [lineHeight, setLineHeight] = useState(0);
   const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const history: TimelineData[] = [
-    {
-      year: "2022",
-      title: "Foundations in Structured Web Development",
-      description:
-        "Began with structured frontend engineering through rigorous coursework, focusing on strict layout systems and clean code organization.",
-      points: [
-        "Mastered HTML, CSS with Grid & Flexbox layout systems",
-        "Built Omnifood - complete architecture project",
-        "Completed Frontend Mentor challenges: News Home Page, Space Tourism",
-        "Parallel study of C++ for algorithmic thinking and memory-level understanding",
-        "Established discipline in clean structure and code organization",
-      ],
-      tech: ["HTML/CSS", "Grid/Flexbox", "jQuery", "Git", "C++"],
-    },
-    {
-      year: "2023",
-      title: "Algorithmic Systems & Performance Engineering",
-      description:
-        "Curiosity around matrix theory and cube mechanics led to building a full 3x3x3 Rubik's Cube Solver in C++. Marked the shift from interface-building to computational system design.",
-      points: [
-        "Designed complete 3D cube state representation engine",
-        "Implemented full CFOP algorithm (Cross, F2L, OLL, PLL)",
-        "Multi-threaded optimization search for performance",
-        "Polymorphic modular architecture design",
-        "CLI visualization with color-coded output",
-        "Achieved ~2-second solve time on legacy hardware",
-      ],
-      tech: ["C++", "Algorithms", "Multithreading", "Data Structures", "CLI"],
-    },
-    {
-      year: "Early–Mid 2024",
-      title: "Backend Architecture & Authentication Design",
-      subtitle: "Worinwell Internship + Independent Projects",
-      description:
-        "Transitioned to backend engineering. Architecture-first thinking became central to my development philosophy.",
-      points: [
-        "Built full CRUD-based Employee Management System",
-        "Designed REST APIs with JWT-based role authentication",
-        "Separated frontend and backend layers cleanly",
-        "Created 'Stella' – Amazon-inspired multi-role backend architecture",
-        "Implemented seller dashboard APIs and product management",
-        "Integrated Razorpay payment gateway",
-        "Built layered architecture with separation of concerns",
-      ],
-      tech: ["Java", "Spring Boot", "REST APIs", "JWT", "MySQL", "Razorpay"],
-    },
-    {
-      year: "Late 2024",
-      title: "Trading Systems & Real-Time Infrastructure",
-      subtitle: "Trade Amplification",
-      description:
-        "Entered algorithmic trading and automation engineering. Focus shifted to latency sensitivity, execution reliability, and distributed signal architecture.",
-      points: [
-        "Mastered MQL4/MQL5 and Pine Script for trading automation",
-        "Built automated trading bots with indicator-based systems (EMA, SMA, Bollinger Bands, S/R)",
-        "Engineered real-time signal distribution infrastructure",
-        "Created Telegram-driven execution systems",
-        "Implemented self-healing backend server with state recovery",
-        "Designed admin-only Telegram bot for client provisioning and access control",
-        "Built persistent state storage with backup management",
-      ],
-      tech: [
-        "MQL5",
-        "Pine Script",
-        "WebSockets",
-        "Telegram API",
-        "Distributed Systems",
-      ],
-    },
-    {
-      year: "2025",
-      title: "Applied AI & Intelligent Systems Engineering",
-      subtitle: "Elisa Assistant",
-      description:
-        "Moved from rule-based Python automation into structured AI frameworks and NLP processing.",
-      points: [
-        "Developed Rasa-based conversational AI assistant",
-        "Integrated Whisper.cpp voice pipeline for speech recognition",
-        "Dockerized dependency isolation for deployment",
-        "Implemented NLP processing: tokenization, POS, NER, dependency parsing",
-        "Built structured JSON extraction from natural language",
-        "GPU acceleration integration for inference",
-        "Experimented with custom NLP engine for deep linguistic understanding",
-      ],
-      tech: [
-        "Python",
-        "Rasa",
-        "Whisper.cpp",
-        "Docker",
-        "NLP",
-        "GPU Acceleration",
-      ],
-    },
-    {
-      year: "2025",
-      title: "Large-Scale ML Research Infrastructure",
-      subtitle: "Qubitron Labs — QubiForge Pipeline",
-      description:
-        "Built an advanced multi-layer trading data generation pipeline designed for large-scale trading research under constrained infrastructure.",
-      points: [
-        "Bronze Layer: SL/TP grid simulation generating millions of trade combinations",
-        "Silver Layer: 200+ technical indicators + advanced S/R modeling",
-        "Gold Layer: Rolling-window feature normalization with price-relative scaling",
-        "Platinum Layer: Decision Tree rule mining → XGBoost experimentation",
-        "Diamond Layer: Strategy evaluation engine (Profit Factor, Max Drawdown, cost modeling)",
-        "Optimized pipeline from 8–9 hours → ~10 minutes",
-        "Parallelized processing across ~57 crore rows",
-        "Fully configurable via centralized configuration file",
-        "Built visual training dataset generator (30-candle windows with overlays)",
-      ],
-      tech: [
-        "Python",
-        "Pandas",
-        "NumPy",
-        "Numba",
-        "XGBoost",
-        "Parallel Processing",
-      ],
-    },
-    {
-      year: "2025–2026",
-      title: "Advanced Trading Strategy Engineering",
-      description:
-        "Merging trading system design with model interpretation and fullstack execution engineering.",
-      points: [
-        "Built Elastic DCA System with fullstack automation (MQL5 + Python + React)",
-        "Dollar-gap based automated entries with dynamic lot management",
-        "Target systems: equity target, balance target, fixed dollar exit",
-        "Hedge-loss recovery logic implementation",
-        "Real-time UI for monitoring P&L and trade states",
-        "Converted TradingView Pine Script to optimized MQL5 (Lorentzian Classification)",
-        "Implemented kernel smoothing reversal logic",
-        "Enhanced configurability beyond original implementation",
-      ],
-      tech: ["MQL5", "Python", "React", "System Design", "ML Integration"],
-    },
-  ];
 
   const toggleExpand = (index: number) => {
     setExpandedItems((prev) => {
@@ -206,15 +71,14 @@ const Evolution: React.FC = () => {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-2 h-2 rounded-full bg-accent-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
           <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-400">
-            My Journey
+            {sectionContent.label}
           </span>
         </div>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cream-100 mb-6 tracking-tight">
-          Evolution
+          {sectionContent.title}
         </h2>
         <p className="text-cream-500/60 font-light text-lg md:text-xl max-w-2xl leading-relaxed">
-          From interfaces to intelligent systems. A timeline of technical
-          growth.
+          {sectionContent.description}
         </p>
       </div>
 

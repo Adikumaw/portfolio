@@ -1,5 +1,23 @@
 import React, { useState } from "react";
-import { Server, Activity, Brain, Cloud, Zap, ChevronDown } from "lucide-react";
+import {
+  Server,
+  Activity,
+  Brain,
+  Cloud,
+  Zap,
+  ChevronDown,
+  LucideIcon,
+} from "lucide-react";
+import content from "../data/content.json";
+
+// Icon mapping for dynamic rendering
+const iconMap: Record<string, LucideIcon> = {
+  Server,
+  Activity,
+  Brain,
+  Cloud,
+  Zap,
+};
 
 interface SkillBlockProps {
   icon: React.ReactNode;
@@ -77,6 +95,9 @@ const SkillBlock: React.FC<SkillBlockProps> = ({
   );
 };
 
+const sectionContent = content.sections.expertise;
+const expertiseData = content.expertise;
+
 const Expertise: React.FC = () => {
   return (
     <section
@@ -88,100 +109,33 @@ const Expertise: React.FC = () => {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-2 h-2 rounded-full bg-accent-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
           <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-400">
-            Capabilities
+            {sectionContent.label}
           </span>
         </div>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cream-100 mb-6 tracking-tight">
-          Expertise
+          {sectionContent.title}
         </h2>
         <p className="text-cream-500/60 font-light text-lg md:text-xl max-w-2xl leading-relaxed">
-          A breakdown of capabilities across systems, automation, and
-          intelligence.
+          {sectionContent.description}
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* 1. Backend */}
-        <SkillBlock
-          icon={<Server className="w-5 h-5" />}
-          title="Backend & Distributed Systems"
-          statement="Designing scalable backend architectures and real-time infrastructure."
-          skills={[
-            "Java (Spring Boot)",
-            "REST API Design",
-            "JWT Auth & RBAC",
-            "WebSocket Real-time Systems",
-            "Multi-role Architecture",
-            "State Persistence & Recovery",
-            "Layered Backend Design",
-            "Database Integration",
-          ]}
-        />
-
-        {/* 2. Trading */}
-        <SkillBlock
-          icon={<Activity className="w-5 h-5" />}
-          title="Trading Systems & Automation"
-          statement="Building latency-aware automated trading infrastructure."
-          skills={[
-            "MQL4 / MQL5",
-            "Pine Script Translation",
-            "MetaTrader EA Development",
-            "Signal Distribution Systems",
-            "Risk Management Automation",
-            "Grid & DCA Logic",
-            "Kernel Smoothing Logic",
-            "Live Market Execution",
-          ]}
-        />
-
-        {/* 3. AI & Data */}
-        <SkillBlock
-          icon={<Brain className="w-5 h-5" />}
-          title="AI & Data Engineering"
-          statement="Designing data pipelines and intelligent decision systems."
-          skills={[
-            "Python (Pandas, NumPy)",
-            "Decision Trees & XGBoost",
-            "Time-series Feature Eng.",
-            "NLP (NER, Tokenization)",
-            "Model Training Workflows",
-            "Dataset Generation Pipelines",
-            "Parallel Data Processing",
-            "Transformer Fundamentals",
-          ]}
-        />
-
-        {/* 4. Infrastructure */}
-        <SkillBlock
-          icon={<Cloud className="w-5 h-5" />}
-          title="Infrastructure & Deployment"
-          statement="Deploying production systems across cloud and self-managed environments."
-          skills={[
-            "AWS (EC2, Workflows)",
-            "Docker & Containerization",
-            "Linux Server Management",
-            "CI-Ready Git Workflows",
-            "Backup & Recovery Handling",
-            "Bluehost Hosting",
-          ]}
-        />
-
-        {/* 5. Performance (Full Width) */}
-        <SkillBlock
-          icon={<Zap className="w-5 h-5" />}
-          title="Performance & Systems Thinking"
-          statement="Optimizing systems under real-world constraints."
-          skills={[
-            "Multithreaded C++ Systems",
-            "Execution Time Optimization",
-            "Memory-Aware Processing",
-            "Config-Driven Architecture",
-            "Large-Scale Dataset Handling",
-            "Low-Latency Execution",
-          ]}
-          fullWidth={true}
-        />
+        {expertiseData.map((item, index) => {
+          const IconComponent = iconMap[item.icon];
+          return (
+            <SkillBlock
+              key={index}
+              icon={
+                IconComponent ? <IconComponent className="w-5 h-5" /> : null
+              }
+              title={item.title}
+              statement={item.statement}
+              skills={item.skills}
+              fullWidth={item.fullWidth}
+            />
+          );
+        })}
       </div>
     </section>
   );

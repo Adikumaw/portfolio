@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ArrowRight, Github, MapPin } from "lucide-react";
 import Button from "./Button";
+import content from "../data/content.json";
 
 const Hero: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const { personal } = content;
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
@@ -26,22 +28,20 @@ const Hero: React.FC = () => {
         <h1
           className={`${getTransitionClass("delay-100")} text-6xl sm:text-7xl lg:text-8xl font-semibold tracking-tighter text-cream-100 mb-8`}
         >
-          Aditya Kumawat
+          {personal.name}
         </h1>
 
         {/* Role & Meta */}
         <div
           className={`${getTransitionClass("delay-200")} flex flex-wrap items-center gap-y-3 gap-x-6 text-cream-500/70 mb-10 text-base sm:text-lg font-medium`}
         >
-          <span className="text-cream-200">
-            Backend & Intelligent Systems Engineer
-          </span>
+          <span className="text-cream-200">{personal.role}</span>
 
           <span className="hidden sm:block w-1.5 h-1.5 bg-accent-500/50 rounded-full"></span>
 
           <div className="flex items-center gap-2 text-cream-500/50">
             <MapPin className="w-4 h-4" />
-            <span>Jaipur, India</span>
+            <span>{personal.location}</span>
           </div>
         </div>
 
@@ -73,16 +73,17 @@ const Hero: React.FC = () => {
 
           <Button
             variant="outline"
-            onClick={() =>
-              window.open("https://github.com/yourusername", "_blank")
-            }
+            onClick={() => window.open(personal.links.github, "_blank")}
           >
             <Github className="w-5 h-5 mr-2" />
             GitHub
           </Button>
 
           <div className="mt-4 sm:mt-0 sm:ml-4">
-            <Button variant="ghost">
+            <Button
+              variant="ghost"
+              onClick={() => window.open(personal.links.resume, "_blank")}
+            >
               Resume
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>

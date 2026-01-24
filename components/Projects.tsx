@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Github, ExternalLink, ChevronDown, X } from "lucide-react";
+import { Github, ExternalLink, ChevronDown, X, Lock } from "lucide-react";
+import content from "../data/content.json";
 
 interface Project {
   title: string;
   stack: string[];
   description: string;
+  github: string;
   highlights: string[];
   details?: {
     architecture?: string[];
@@ -25,6 +27,11 @@ const Projects: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [touchStartX, setTouchStartX] = useState(0);
   const [touchEndX, setTouchEndX] = useState(0);
+  const [showPrivatePopup, setShowPrivatePopup] = useState(false);
+
+  // Load projects from JSON
+  const projects: Project[] = content.projects;
+  const sectionContent = content.sections.projects;
 
   // Detect mobile viewport
   useEffect(() => {
@@ -36,145 +43,15 @@ const Projects: React.FC = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const projects: Project[] = [
-    {
-      title: "Real-Time Trading Signal Distribution Infrastructure",
-      stack: ["Java", "Spring Boot", "WebSocket", "MQL5", "Telegram Bot API"],
-      description:
-        "A production-grade distributed trading execution system built for automated signal broadcasting and account-level execution.",
-      highlights: [
-        "High-performance Java server parsing multi-target trading signals from Telegram groups",
-        "Per-user distribution logic with signal deduplication and MetaTrader ID verification",
-        "Execution layer using MetaTrader EA with automated order placement and trailing stop-loss",
-        "Self-healing recovery with persistent state storage after server restarts",
-      ],
-      details: {
-        architecture: [
-          "High-performance Java server parsing multi-target trading signals from Telegram groups",
-          "Per-user distribution logic with signal deduplication and MetaTrader ID verification",
-          "Controlled broadcast routing to individual users",
-          "Execution layer using MetaTrader EA with automated order placement",
-          "Trailing stop-loss and risk management enforcement",
-          "Structured signal formatting for Telegram channels",
-        ],
-        engineering: [
-          "Admin-only Telegram bot for client provisioning",
-          "Access control and backup management",
-          "Persistent state storage with self-healing recovery",
-          "Transition from trading bots to distributed trading infrastructure",
-        ],
-      },
-    },
-    {
-      title: "QubiForge – Multi-Layer Trading Strategy Data Pipeline",
-      stack: [
-        "Python",
-        "Pandas",
-        "NumPy",
-        "Numba",
-        "XGBoost",
-        "Parallel Processing",
-      ],
-      description:
-        "A configurable AI data generation and strategy mining pipeline designed for large-scale trading research.",
-      highlights: [
-        "Bronze to Diamond layered data architecture for systematic strategy mining",
-        "Optimized pipeline from 8-9 hours to ~10 minutes",
-        "Parallelized processing across ~57 crore rows of trading data",
-        "Fully configurable via centralized configuration file",
-      ],
-      details: {
-        architecture: [
-          "Bronze Layer: SL/TP grid simulation generating millions of trade outcome combinations",
-          "Silver Layer: 200+ technical indicators + advanced support/resistance modeling",
-          "Gold Layer: Rolling-window feature normalization with price-relative scaling",
-          "Platinum Layer: Decision Tree rule mining to XGBoost model experimentation",
-          "Diamond Layer: Strategy evaluation engine (Profit Factor, Max Drawdown, cost modeling)",
-        ],
-        engineering: [
-          "Optimized pipeline from 8-9 hours to ~10 minutes",
-          "Parallelized processing across large datasets (~57 crore rows)",
-          "Fully configurable via a single centralized configuration file",
-          "Designed for large-scale model training under constrained infrastructure",
-        ],
-      },
-    },
-    {
-      title: "Stella – Scalable E-Commerce Backend Architecture",
-      stack: ["Java", "Spring Boot", "JWT", "Razorpay", "MySQL"],
-      description:
-        "A multi-role backend architecture inspired by Amazon's seller-user ecosystem with architecture-first design.",
-      highlights: [
-        "Separate authentication domains for Users and Sellers (JWT-based)",
-        "Seller dashboard APIs with product upload and media handling",
-        "User-side systems with dynamic search, cart, and order lifecycle",
-        "Razorpay payment gateway integration",
-      ],
-      details: {
-        architecture: [
-          "Separate authentication domains for Users and Sellers (JWT-based)",
-          "Seller dashboard APIs: Product upload, Media handling, Review management",
-          "User-side systems: Dynamic search, Cart management, Order lifecycle tracking",
-        ],
-        engineering: [
-          "Razorpay payment gateway integration",
-          "Clean layered architecture with separation of concerns",
-          "Designed for scalability and modular extension",
-          "Architecture-first backend design approach",
-        ],
-      },
-    },
-    {
-      title: "Elastic DCA Trading System (Fullstack Automation)",
-      stack: ["MQL5", "Python", "React"],
-      description:
-        "A grid-based automated trading system enabling controlled position scaling and equity-based risk management.",
-      highlights: [
-        "Dollar-gap based automated entries with dynamic lot management",
-        "Multiple target systems: Equity, Balance, and Fixed dollar exit",
-        "Hedge-loss recovery logic with start-limit entry system",
-        "Real-time UI for monitoring P&L and trade states",
-      ],
-      details: {
-        architecture: [
-          "Dollar-gap based automated entries",
-          "Dynamic lot management system",
-          "Equity, Balance, and Fixed dollar exit targets",
-          "Hedge-loss recovery logic",
-        ],
-        engineering: [
-          "Start-limit entry system for controlled positioning",
-          "Real-time UI for monitoring P&L and trade states",
-          "Bridged backend automation with interactive trading control",
-        ],
-      },
-    },
-    {
-      title: "Rubik's Cube 3x3x3 Solver (Multi-Threaded Engine)",
-      stack: ["C++", "OOP", "Multithreading", "Algorithm Optimization"],
-      description:
-        "A CFOP-based high-performance cube-solving engine built with a fully modular C++ architecture.",
-      highlights: [
-        "Custom 3D cube state representation engine",
-        "CFOP algorithm implementation (Cross, F2L, OLL, PLL)",
-        "Multi-threaded optimization search with ~2 second solve time",
-        "CLI visualization with color-coded output",
-      ],
-      details: {
-        architecture: [
-          "Custom 3D cube state representation engine",
-          "CFOP algorithm implementation (Cross, F2L, OLL, PLL)",
-          "Multi-threaded optimization search",
-          "Polymorphism-driven modular architecture",
-        ],
-        engineering: [
-          "CLI visualization with color-coded output",
-          "Solves within ~2 seconds on legacy hardware",
-          "Shift from interface-building to computational system design",
-        ],
-      },
-    },
-  ];
+  const handleGithubClick = (github: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (github === "private") {
+      setShowPrivatePopup(true);
+      setTimeout(() => setShowPrivatePopup(false), 3000);
+    } else {
+      window.open(github, "_blank", "noopener,noreferrer");
+    }
+  };
 
   const toggleTechExpand = (index: number, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -301,15 +178,14 @@ const Projects: React.FC = () => {
           <div className="flex items-center gap-3 mb-4">
             <div className="w-2 h-2 rounded-full bg-accent-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
             <span className="text-xs font-mono uppercase tracking-[0.2em] text-accent-400">
-              Featured Work
+              {sectionContent.label}
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cream-100 mb-6 tracking-tight">
-            Projects
+            {sectionContent.title}
           </h2>
           <p className="text-cream-500/60 font-light text-lg md:text-xl max-w-2xl leading-relaxed">
-            Engineering solutions designed for scale, performance, and
-            reliability.
+            {sectionContent.description}
           </p>
         </div>
 
@@ -415,9 +291,25 @@ const Projects: React.FC = () => {
                           <ExternalLink className="w-4 h-4" />
                           <span>View Details</span>
                         </button>
-                        <button className="flex items-center gap-2 text-sm font-medium text-cream-500/50 hover:text-accent-400 transition-colors duration-300">
-                          <Github className="w-4 h-4" />
-                          <span>Code</span>
+                        <button
+                          onClick={(e) => handleGithubClick(project.github, e)}
+                          className={`flex items-center gap-2 text-sm font-medium transition-colors duration-300 ${
+                            project.github === "private"
+                              ? "text-cream-500/30 hover:text-cream-500/50"
+                              : "text-cream-500/50 hover:text-accent-400"
+                          }`}
+                        >
+                          {project.github === "private" ? (
+                            <>
+                              <Lock className="w-4 h-4" />
+                              <span>Private</span>
+                            </>
+                          ) : (
+                            <>
+                              <Github className="w-4 h-4" />
+                              <span>Code</span>
+                            </>
+                          )}
                         </button>
                       </div>
                     </div>
@@ -427,6 +319,25 @@ const Projects: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Private Project Popup */}
+        {showPrivatePopup && (
+          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 px-6 py-4 bg-gray-900/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl animate-fade-in-up">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                <Lock className="w-5 h-5 text-amber-400" />
+              </div>
+              <div>
+                <p className="text-cream-100 font-medium text-sm">
+                  Private Repository
+                </p>
+                <p className="text-cream-500/60 text-xs">
+                  This project's source code is not publicly available.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Dot Indicators Only */}
         <div className="flex justify-center gap-2 mt-4 px-6 sm:px-12 lg:px-24 2xl:px-32 max-w-[1400px] 2xl:max-w-[1600px] mx-auto">
@@ -540,9 +451,27 @@ const Projects: React.FC = () => {
 
                 {/* Action Buttons */}
                 <div className="flex items-center gap-4 mt-8 pt-6 border-t border-white/5">
-                  <button className="flex items-center gap-2 px-6 py-3 text-sm font-medium text-black bg-cream-100 rounded-lg hover:bg-white transition-colors duration-300">
-                    <Github className="w-4 h-4" />
-                    <span>View Code</span>
+                  <button
+                    onClick={(e) =>
+                      handleGithubClick(selectedProject.github, e)
+                    }
+                    className={`flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-lg transition-colors duration-300 ${
+                      selectedProject.github === "private"
+                        ? "text-cream-500/60 bg-white/5 border border-white/10 hover:border-white/20 cursor-not-allowed"
+                        : "text-black bg-cream-100 hover:bg-white"
+                    }`}
+                  >
+                    {selectedProject.github === "private" ? (
+                      <>
+                        <Lock className="w-4 h-4" />
+                        <span>Private Repository</span>
+                      </>
+                    ) : (
+                      <>
+                        <Github className="w-4 h-4" />
+                        <span>View Code</span>
+                      </>
+                    )}
                   </button>
                   <button
                     onClick={() => setSelectedProject(null)}

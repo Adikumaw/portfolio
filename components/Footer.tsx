@@ -1,5 +1,8 @@
 import React from "react";
 import { Github, Linkedin, Mail, FileText, Heart } from "lucide-react";
+import content from "../data/content.json";
+
+const personal = content.personal;
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -12,7 +15,7 @@ const Footer: React.FC = () => {
           {/* Brand & Copyright */}
           <div className="flex flex-col items-center md:items-start gap-2">
             <span className="text-cream-100 font-bold text-lg tracking-tighter">
-              Aditya.
+              {personal.name.split(" ")[0]}.
             </span>
             <span className="text-cream-100/40 text-sm font-mono tracking-wide">
               © {currentYear} · All rights reserved
@@ -22,7 +25,7 @@ const Footer: React.FC = () => {
           {/* Links */}
           <div className="flex items-center gap-6">
             <a
-              href="mailto:kumawataditya105@gmail.com"
+              href={`mailto:${personal.email}`}
               className="flex items-center gap-2 text-cream-100/50 hover:text-accent-400 transition-colors duration-300 text-sm"
             >
               <Mail className="w-4 h-4" />
@@ -32,7 +35,7 @@ const Footer: React.FC = () => {
             <span className="w-1 h-1 rounded-full bg-white/10"></span>
 
             <a
-              href="https://github.com"
+              href={personal.links.github}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-cream-100/50 hover:text-accent-400 transition-colors duration-300 text-sm"
@@ -44,7 +47,7 @@ const Footer: React.FC = () => {
             <span className="w-1 h-1 rounded-full bg-white/10"></span>
 
             <a
-              href="https://linkedin.com"
+              href={personal.links.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-cream-100/50 hover:text-accent-400 transition-colors duration-300 text-sm"
@@ -56,7 +59,7 @@ const Footer: React.FC = () => {
             <span className="w-1 h-1 rounded-full bg-white/10"></span>
 
             <a
-              href="/resume.pdf"
+              href={personal.links.resume}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-cream-100/50 hover:text-accent-400 transition-colors duration-300 text-sm"
