@@ -243,7 +243,6 @@ const Projects: React.FC = () => {
       transform: `translateX(${translateAmount}px) scale(${isCenter ? 1 : 0.85})`,
       opacity: isCenter ? 1 : isAdjacent ? 0.45 : 0,
       zIndex: isCenter ? 30 : isAdjacent ? 20 : 10,
-      // filter: isCenter ? "none" : "blur(0.5px)",
       pointerEvents: isCenter ? ("auto" as const) : ("none" as const),
     };
   };
@@ -403,97 +402,102 @@ const Projects: React.FC = () => {
             style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}
           >
             <div
-              className="glass-card max-w-3xl w-full max-h-[80vh] overflow-y-auto rounded-2xl p-8 relative"
+              className="glass-card max-w-3xl w-full max-h-[80vh] rounded-2xl p-8 relative"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-cream-500/60 hover:text-cream-100 transition-colors duration-300"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              {/* Tech Stack */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {selectedProject.stack.map((tech, i) => (
-                  <span
-                    key={i}
-                    className="px-3 py-1.5 text-xs uppercase tracking-wider font-mono font-medium text-accent-400 bg-accent-500/10 rounded-lg border border-accent-500/20"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              {/* Title */}
-              <h3 className="text-2xl md:text-3xl font-bold text-cream-100 mb-4 tracking-tight">
-                {selectedProject.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-cream-500/60 text-base leading-relaxed mb-8">
-                {selectedProject.description}
-              </p>
-
-              {/* Details Grid */}
-              {selectedProject.details && (
-                <div className="grid md:grid-cols-2 gap-8">
-                  {selectedProject.details.architecture && (
-                    <div>
-                      <h4 className="text-xs font-bold text-accent-400/80 uppercase tracking-widest mb-4 pb-2 border-b border-accent-500/20">
-                        System Architecture
-                      </h4>
-                      <ul className="space-y-3">
-                        {selectedProject.details.architecture.map(
-                          (item, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-start text-sm text-cream-500/60"
-                            >
-                              <span className="mr-3 mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-500 flex-shrink-0" />
-                              <span className="leading-relaxed">{item}</span>
-                            </li>
-                          ),
-                        )}
-                      </ul>
-                    </div>
-                  )}
-                  {selectedProject.details.engineering && (
-                    <div>
-                      <h4 className="text-xs font-bold text-accent-400/80 uppercase tracking-widest mb-4 pb-2 border-b border-accent-500/20">
-                        Engineering Highlights
-                      </h4>
-                      <ul className="space-y-3">
-                        {selectedProject.details.engineering.map(
-                          (item, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-start text-sm text-cream-500/60"
-                            >
-                              <span className="mr-3 mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-500 flex-shrink-0" />
-                              <span className="leading-relaxed">{item}</span>
-                            </li>
-                          ),
-                        )}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-4 mt-8 pt-6 border-t border-white/5">
-                <button className="flex items-center gap-2 px-6 py-3 text-sm font-medium text-black bg-cream-100 rounded-lg hover:bg-white transition-colors duration-300">
-                  <Github className="w-4 h-4" />
-                  <span>View Code</span>
-                </button>
+              {/* Glow Effect - covers whole card, not just scrollable area */}
+              <div className="absolute inset-0 bg-white/5 rounded-2xl blur-3xl pointer-events-none z-0" />
+              {/* Modal Content - scrollable */}
+              <div className="relative z-10 overflow-y-auto max-h-[70vh]">
+                {/* Close Button */}
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="flex items-center gap-2 px-6 py-3 text-sm font-medium text-cream-500/60 border border-white/10 rounded-lg hover:border-white/20 hover:text-cream-100 transition-colors duration-300"
+                  className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-cream-500/60 hover:text-cream-100 transition-colors duration-300"
                 >
-                  Close
+                  <X className="w-5 h-5" />
                 </button>
+
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {selectedProject.stack.map((tech, i) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1.5 text-xs uppercase tracking-wider font-mono font-medium text-accent-400 bg-accent-500/10 rounded-lg border border-accent-500/20"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Title */}
+                <h3 className="text-2xl md:text-3xl font-bold text-cream-100 mb-4 tracking-tight">
+                  {selectedProject.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-cream-500/60 text-base leading-relaxed mb-8">
+                  {selectedProject.description}
+                </p>
+
+                {/* Details Grid */}
+                {selectedProject.details && (
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {selectedProject.details.architecture && (
+                      <div>
+                        <h4 className="text-xs font-bold text-accent-400/80 uppercase tracking-widest mb-4 pb-2 border-b border-accent-500/20">
+                          System Architecture
+                        </h4>
+                        <ul className="space-y-3">
+                          {selectedProject.details.architecture.map(
+                            (item, idx) => (
+                              <li
+                                key={idx}
+                                className="flex items-start text-sm text-cream-500/60"
+                              >
+                                <span className="mr-3 mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-500 flex-shrink-0" />
+                                <span className="leading-relaxed">{item}</span>
+                              </li>
+                            ),
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                    {selectedProject.details.engineering && (
+                      <div>
+                        <h4 className="text-xs font-bold text-accent-400/80 uppercase tracking-widest mb-4 pb-2 border-b border-accent-500/20">
+                          Engineering Highlights
+                        </h4>
+                        <ul className="space-y-3">
+                          {selectedProject.details.engineering.map(
+                            (item, idx) => (
+                              <li
+                                key={idx}
+                                className="flex items-start text-sm text-cream-500/60"
+                              >
+                                <span className="mr-3 mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-500 flex-shrink-0" />
+                                <span className="leading-relaxed">{item}</span>
+                              </li>
+                            ),
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Action Buttons */}
+                <div className="flex items-center gap-4 mt-8 pt-6 border-t border-white/5">
+                  <button className="flex items-center gap-2 px-6 py-3 text-sm font-medium text-black bg-cream-100 rounded-lg hover:bg-white transition-colors duration-300">
+                    <Github className="w-4 h-4" />
+                    <span>View Code</span>
+                  </button>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="flex items-center gap-2 px-6 py-3 text-sm font-medium text-cream-500/60 border border-white/10 rounded-lg hover:border-white/20 hover:text-cream-100 transition-colors duration-300"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
           </div>,
