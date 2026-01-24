@@ -27,7 +27,7 @@ const Projects: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [touchStartX, setTouchStartX] = useState(0);
   const [touchEndX, setTouchEndX] = useState(0);
-  const [showPrivatePopup, setShowPrivatePopup] = useState(false);
+  // Remove popup state
 
   // Load projects from JSON
   const projects: Project[] = content.projects;
@@ -45,10 +45,7 @@ const Projects: React.FC = () => {
 
   const handleGithubClick = (github: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    if (github === "private") {
-      setShowPrivatePopup(true);
-      setTimeout(() => setShowPrivatePopup(false), 3000);
-    } else {
+    if (github && github !== "private") {
       window.open(github, "_blank", "noopener,noreferrer");
     }
   };
@@ -295,9 +292,15 @@ const Projects: React.FC = () => {
                           onClick={(e) => handleGithubClick(project.github, e)}
                           className={`flex items-center gap-2 text-sm font-medium transition-colors duration-300 ${
                             project.github === "private"
-                              ? "text-cream-500/30 hover:text-cream-500/50"
+                              ? "text-cream-500/30 cursor-not-allowed"
                               : "text-cream-500/50 hover:text-accent-400"
                           }`}
+                          disabled={project.github === "private"}
+                          title={
+                            project.github === "private"
+                              ? "This project's source code is private."
+                              : "View on GitHub"
+                          }
                         >
                           {project.github === "private" ? (
                             <>
@@ -320,24 +323,7 @@ const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Private Project Popup */}
-        {showPrivatePopup && (
-          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 px-6 py-4 bg-gray-900/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl animate-fade-in-up">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                <Lock className="w-5 h-5 text-amber-400" />
-              </div>
-              <div>
-                <p className="text-cream-100 font-medium text-sm">
-                  Private Repository
-                </p>
-                <p className="text-cream-500/60 text-xs">
-                  This project's source code is not publicly available.
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* No popup for private projects. Tooltip on button instead. */}
 
         {/* Dot Indicators Only */}
         <div className="flex justify-center gap-2 mt-4 px-6 sm:px-12 lg:px-24 2xl:px-32 max-w-[1400px] 2xl:max-w-[1600px] mx-auto">
@@ -457,9 +443,15 @@ const Projects: React.FC = () => {
                     }
                     className={`flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-lg transition-colors duration-300 ${
                       selectedProject.github === "private"
-                        ? "text-cream-500/60 bg-white/5 border border-white/10 hover:border-white/20 cursor-not-allowed"
+                        ? "text-cream-500/60 bg-white/5 border border-white/10 cursor-not-allowed"
                         : "text-black bg-cream-100 hover:bg-white"
                     }`}
+                    disabled={selectedProject.github === "private"}
+                    title={
+                      selectedProject.github === "private"
+                        ? "This project's source code is private."
+                        : "View on GitHub"
+                    }
                   >
                     {selectedProject.github === "private" ? (
                       <>

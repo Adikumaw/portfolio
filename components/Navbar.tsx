@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, Github, Linkedin, Sun, Moon } from "lucide-react";
+import content from "../data/content.json";
 
+const personal = content.personal;
 interface NavbarProps {
   isDarkMode: boolean;
   onThemeToggle: () => void;
@@ -95,7 +97,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, onThemeToggle }) => {
 
             <div className="flex items-center gap-5">
               <a
-                href="https://github.com"
+                href={personal.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-cream-100/60 hover:text-accent-400 transition-colors duration-300"
@@ -103,7 +105,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, onThemeToggle }) => {
                 <Github className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href={personal.links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-cream-100/60 hover:text-accent-400 transition-colors duration-300"
@@ -195,7 +197,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, onThemeToggle }) => {
 
           <div className="flex items-center gap-6 mt-8">
             <a
-              href="https://github.com"
+              href={personal.links.github}
               target="_blank"
               rel="noopener noreferrer"
               className="text-cream-100/60 hover:text-accent-400 transition-colors"
@@ -203,7 +205,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, onThemeToggle }) => {
               <Github className="w-6 h-6" />
             </a>
             <a
-              href="https://linkedin.com"
+              href={personal.links.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="text-cream-100/60 hover:text-accent-400 transition-colors"
