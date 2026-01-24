@@ -345,34 +345,35 @@ const Projects: React.FC = () => {
       {selectedProject &&
         createPortal(
           <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
             onClick={() => setSelectedProject(null)}
             style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}
           >
             <div
-              className="max-w-3xl w-full max-h-[80vh] rounded-2xl p-8 relative bg-white/5 backdrop-blur-xl backdrop-saturate-150 border border-white/10 hover:border-white/20 hover:shadow-[0_0_50px_rgba(255,255,255,0.08)]"
+              className="glass-card group relative w-[90vw] max-w-3xl max-h-[80vh] rounded-2xl p-6 md:p-8 border border-white/10 overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Glow Effect - covers whole card, not just scrollable area - Hidden on mobile */}
+              {/* Glow Effect - Hidden on mobile */}
               {!isMobile && (
-                <div className="absolute inset-0 bg-white/5 rounded-2xl blur-3xl pointer-events-none z-0" />
+                <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               )}
-              {/* Modal Content - scrollable */}
-              <div className="relative z-10 overflow-y-auto max-h-[70vh]">
-                {/* Close Button */}
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-cream-500/60 hover:text-cream-100 transition-colors duration-300"
-                >
-                  <X className="w-5 h-5" />
-                </button>
 
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-cream-500/60 hover:text-cream-100 transition-colors duration-300 z-20"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Modal Content - scrollable */}
+              <div className="relative z-10 overflow-y-auto max-h-[70vh] pr-2">
                 {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2 mb-5">
                   {selectedProject.stack.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1.5 text-xs uppercase tracking-wider font-mono font-medium text-accent-400 bg-accent-500/10 rounded-lg border border-accent-500/20"
+                      className="px-2.5 py-1 text-[10px] uppercase tracking-wider font-mono font-medium text-accent-400 bg-accent-500/10 rounded-md border border-accent-500/20"
                     >
                       {tech}
                     </span>
@@ -380,31 +381,31 @@ const Projects: React.FC = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-cream-100 mb-4 tracking-tight">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-cream-100 mb-4 tracking-tight leading-tight">
                   {selectedProject.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-cream-500/60 text-base leading-relaxed mb-8">
+                <p className="text-cream-500/50 text-sm leading-relaxed mb-6">
                   {selectedProject.description}
                 </p>
 
                 {/* Details Grid */}
                 {selectedProject.details && (
-                  <div className="grid md:grid-cols-2 gap-8">
+                  <div className="grid md:grid-cols-2 gap-6 mb-6">
                     {selectedProject.details.architecture && (
                       <div>
-                        <h4 className="text-xs font-bold text-accent-400/80 uppercase tracking-widest mb-4 pb-2 border-b border-accent-500/20">
+                        <h4 className="text-[10px] font-bold text-accent-400/80 uppercase tracking-widest mb-3 pb-2 border-b border-accent-500/20">
                           System Architecture
                         </h4>
-                        <ul className="space-y-3">
+                        <ul className="space-y-2">
                           {selectedProject.details.architecture.map(
                             (item, idx) => (
                               <li
                                 key={idx}
-                                className="flex items-start text-sm text-cream-500/60"
+                                className="flex items-start text-sm text-cream-500/40 group-hover:text-cream-500/60 transition-colors duration-300"
                               >
-                                <span className="mr-3 mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-500 flex-shrink-0" />
+                                <span className="mr-3 mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-500/50 group-hover:bg-accent-400 transition-colors duration-300 flex-shrink-0" />
                                 <span className="leading-relaxed">{item}</span>
                               </li>
                             ),
@@ -414,17 +415,17 @@ const Projects: React.FC = () => {
                     )}
                     {selectedProject.details.engineering && (
                       <div>
-                        <h4 className="text-xs font-bold text-accent-400/80 uppercase tracking-widest mb-4 pb-2 border-b border-accent-500/20">
+                        <h4 className="text-[10px] font-bold text-accent-400/80 uppercase tracking-widest mb-3 pb-2 border-b border-accent-500/20">
                           Engineering Highlights
                         </h4>
-                        <ul className="space-y-3">
+                        <ul className="space-y-2">
                           {selectedProject.details.engineering.map(
                             (item, idx) => (
                               <li
                                 key={idx}
-                                className="flex items-start text-sm text-cream-500/60"
+                                className="flex items-start text-sm text-cream-500/40 group-hover:text-cream-500/60 transition-colors duration-300"
                               >
-                                <span className="mr-3 mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-500 flex-shrink-0" />
+                                <span className="mr-3 mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-500/50 group-hover:bg-accent-400 transition-colors duration-300 flex-shrink-0" />
                                 <span className="leading-relaxed">{item}</span>
                               </li>
                             ),
@@ -436,15 +437,15 @@ const Projects: React.FC = () => {
                 )}
 
                 {/* Action Buttons */}
-                <div className="flex items-center gap-4 mt-8 pt-6 border-t border-white/5">
+                <div className="flex items-center gap-4 pt-4 border-t border-white/5">
                   <button
                     onClick={(e) =>
                       handleGithubClick(selectedProject.github, e)
                     }
-                    className={`flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-lg transition-colors duration-300 ${
+                    className={`flex items-center gap-2 text-sm font-medium transition-colors duration-300 ${
                       selectedProject.github === "private"
-                        ? "text-cream-500/60 bg-white/5 border border-white/10 cursor-not-allowed"
-                        : "text-black bg-cream-100 hover:bg-white"
+                        ? "text-cream-500/30 cursor-not-allowed"
+                        : "text-cream-500/50 hover:text-accent-400"
                     }`}
                     disabled={selectedProject.github === "private"}
                     title={
@@ -456,20 +457,21 @@ const Projects: React.FC = () => {
                     {selectedProject.github === "private" ? (
                       <>
                         <Lock className="w-4 h-4" />
-                        <span>Private Repository</span>
+                        <span>Private</span>
                       </>
                     ) : (
                       <>
                         <Github className="w-4 h-4" />
-                        <span>View Code</span>
+                        <span>Code</span>
                       </>
                     )}
                   </button>
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="flex items-center gap-2 px-6 py-3 text-sm font-medium text-cream-500/60 border border-white/10 rounded-lg hover:border-white/20 hover:text-cream-100 transition-colors duration-300"
+                    className="flex items-center gap-2 text-sm font-medium text-cream-500/50 hover:text-accent-400 transition-colors duration-300"
                   >
-                    Close
+                    <X className="w-4 h-4" />
+                    <span>Close</span>
                   </button>
                 </div>
               </div>

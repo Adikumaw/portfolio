@@ -11,6 +11,8 @@ import Footer from "./components/Footer";
 const App: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isGrabbing, setIsGrabbing] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -21,11 +23,22 @@ const App: React.FC = () => {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest('a, button, [role="button"]')) {
+      // Check for grabable elements (carousel, draggable items)
+      if (target.closest('.cursor-grab, [draggable="true"]')) {
+        setIsGrabbing(true);
+        setIsHovering(false);
+      } else if (target.closest('a, button, [role="button"]')) {
         setIsHovering(true);
+        setIsGrabbing(false);
       } else {
         setIsHovering(false);
+        setIsGrabbing(false);
       }
+    };
+
+    const handleClick = () => {
+      setIsClicking(true);
+      setTimeout(() => setIsClicking(false), 300);
     };
 
     // Update glass card mouse position
@@ -43,11 +56,13 @@ const App: React.FC = () => {
     window.addEventListener("mousemove", updateCursor);
     window.addEventListener("mouseover", handleMouseOver);
     window.addEventListener("mousemove", handleGlassCards);
+    window.addEventListener("click", handleClick);
 
     return () => {
       window.removeEventListener("mousemove", updateCursor);
       window.removeEventListener("mouseover", handleMouseOver);
       window.removeEventListener("mousemove", handleGlassCards);
+      window.removeEventListener("click", handleClick);
     };
   }, []);
 
@@ -181,11 +196,16 @@ const App: React.FC = () => {
     >
       {/* Custom Cursor */}
       <div
-        className={`custom-cursor ${isHovering ? "hover" : ""}`}
+        className={`custom-cursor ${isHovering ? "hover" : ""} ${isGrabbing ? "grabbing" : ""} ${isClicking ? "click" : ""}`}
         style={{ left: mousePosition.x, top: mousePosition.y }}
-      />
+      >
+        <span className="cursor-line cursor-line-top" />
+        <span className="cursor-line cursor-line-right" />
+        <span className="cursor-line cursor-line-bottom" />
+        <span className="cursor-line cursor-line-left" />
+      </div>
       <div
-        className="custom-cursor-dot"
+        className={`custom-cursor-dot ${isGrabbing ? "grabbing" : ""}`}
         style={{ left: mousePosition.x, top: mousePosition.y }}
       />
 
