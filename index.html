@@ -112,7 +112,7 @@
       backdrop-filter: blur(40px) saturate(180%);
       -webkit-backdrop-filter: blur(40px) saturate(180%);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      transition: all 0.5s ease, box-shadow 0.5s ease, border-color 0.3s ease;
+      transition: all 0.5s ease, box-shadow 0.5s ease, border-color 0.3s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease, background 0.5s ease;
     }
 
     .glass-card::before {
@@ -173,92 +173,203 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    /* Light theme overrides */
+    /* Light theme overrides - Frosted ice glass aesthetic */
     html.light body {
-      background-color: #f9fafb;
-      color: #1f2937;
+      background-color: #f0f4f8;
+      color: #1e293b;
     }
 
     html.light .bg-black {
-      background-color: #f9fafb !important;
+      background-color: #f0f4f8 !important;
     }
 
+    /* Primary text colors - dark slate for readability */
     html.light .text-cream,
     html.light .text-cream-100,
-    html.light .text-cream-200 {
-      color: #111827 !important;
+    html.light .text-cream-200,
+    html.light .text-cream-500 {
+      color: #0f172a !important;
     }
 
+    /* Secondary/muted text */
     html.light .text-cream\/50,
     html.light .text-cream\/60,
     html.light .text-cream\/70,
     html.light .text-cream-500\/50,
     html.light .text-cream-500\/60,
     html.light .text-cream-500\/70 {
-      color: rgba(55, 65, 81, 0.85) !important;
+      color: #475569 !important;
     }
 
+    /* Tertiary/placeholder text */
     html.light .text-cream\/40,
     html.light .text-cream-500\/40 {
-      color: rgba(107, 114, 128, 0.85) !important;
+      color: #64748b !important;
     }
 
     html.light .text-cream\/80 {
-      color: rgba(31, 41, 55, 0.9) !important;
+      color: #1e293b !important;
     }
 
-    html.light .bg-cream {
-      background-color: #1f2937 !important;
-      color: #f9fafb !important;
+    /* White text overrides for light mode */
+    html.light .text-white {
+      color: #0f172a !important;
     }
 
+    html.light .text-white\/60,
+    html.light .text-white\/70,
+    html.light .text-white\/80 {
+      color: #334155 !important;
+    }
+
+    /* Accent colors - keep blue but make it richer */
+    html.light .text-accent-400 {
+      color: #2563eb !important;
+    }
+
+    html.light .text-accent-500 {
+      color: #1d4ed8 !important;
+    }
+
+    /* Buttons - primary (cream/white bg in dark becomes dark in light) */
+    html.light .bg-cream,
+    html.light .bg-cream-100 {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+    }
+
+    html.light .bg-cream-100:hover,
+    html.light .hover\:bg-white:hover {
+      background-color: #0f172a !important;
+      color: #ffffff !important;
+    }
+
+    /* Glass card - frosted ice effect */
     html.light .glass-card {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(40px) saturate(180%);
-      -webkit-backdrop-filter: blur(40px) saturate(180%);
-      border-color: rgba(0, 0, 0, 0.08);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(40px) saturate(150%);
+      -webkit-backdrop-filter: blur(40px) saturate(150%);
+      border-color: rgba(148, 163, 184, 0.3);
+      box-shadow:
+        0 8px 32px rgba(15, 23, 42, 0.08),
+        0 2px 8px rgba(15, 23, 42, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        inset 0 -1px 0 rgba(148, 163, 184, 0.1);
     }
 
     html.light .glass-card::before {
-      background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.08), transparent 40%);
+      background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.15), transparent 40%);
     }
 
     html.light .glass-card:hover {
-      border-color: rgba(0, 0, 0, 0.12);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 60px rgba(59, 130, 246, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      border-color: rgba(59, 130, 246, 0.3);
+      box-shadow:
+        0 12px 40px rgba(15, 23, 42, 0.12),
+        0 4px 12px rgba(59, 130, 246, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 0 rgba(148, 163, 184, 0.15);
     }
 
-    html.light .bg-white\/5,
+    /* Background overlays */
+    html.light .bg-white\/5 {
+      background-color: rgba(15, 23, 42, 0.03) !important;
+    }
+
     html.light .bg-white\/10 {
-      background-color: rgba(0, 0, 0, 0.05) !important;
+      background-color: rgba(15, 23, 42, 0.06) !important;
     }
 
-    html.light .border-white\/5,
-    html.light .border-white\/10,
+    html.light .bg-white\/20 {
+      background-color: rgba(15, 23, 42, 0.08) !important;
+    }
+
+    /* Accent backgrounds */
+    html.light .bg-accent-500\/10,
+    html.light .bg-accent\/10 {
+      background-color: rgba(37, 99, 235, 0.12) !important;
+    }
+
+    /* Borders */
+    html.light .border-white\/5 {
+      border-color: rgba(148, 163, 184, 0.2) !important;
+    }
+
+    html.light .border-white\/10 {
+      border-color: rgba(148, 163, 184, 0.25) !important;
+    }
+
     html.light .border-white\/20 {
-      border-color: rgba(0, 0, 0, 0.1) !important;
+      border-color: rgba(148, 163, 184, 0.35) !important;
     }
 
+    html.light .border-accent-500\/20,
+    html.light .border-accent\/20 {
+      border-color: rgba(37, 99, 235, 0.3) !important;
+    }
+
+    /* Hover states for borders */
+    html.light .hover\:border-white\/20:hover {
+      border-color: rgba(59, 130, 246, 0.4) !important;
+    }
+
+    /* Custom cursor for light mode */
     html.light .custom-cursor {
-      border-color: rgba(59, 130, 246, 1);
+      border-color: rgba(37, 99, 235, 1);
     }
 
     html.light .custom-cursor-dot {
-      background-color: rgba(59, 130, 246, 1);
+      background-color: rgba(37, 99, 235, 1);
     }
 
+    /* Selection highlight */
     html.light ::selection {
-      background-color: rgba(59, 130, 246, 0.2);
-      color: #111827;
+      background-color: rgba(59, 130, 246, 0.25);
+      color: #0f172a;
     }
 
-    html.light .bg-accent\/10 {
-      background-color: rgba(59, 130, 246, 0.1) !important;
+    /* Dot indicators in carousel */
+    html.light .bg-accent-500 {
+      background-color: #2563eb !important;
     }
 
-    html.light .border-accent\/20 {
-      border-color: rgba(59, 130, 246, 0.25) !important;
+    /* Glow effects - subtle blue tint */
+    html.light [class*="shadow-"][class*="blue"],
+    html.light [class*="shadow-"][class*="accent"] {
+      --tw-shadow-color: rgba(37, 99, 235, 0.3);
+    }
+
+    /* Nav/header backgrounds */
+    html.light .bg-black\/80 {
+      background-color: rgba(240, 244, 248, 0.85) !important;
+    }
+
+    html.light .bg-black\/60 {
+      background-color: rgba(240, 244, 248, 0.75) !important;
+    }
+
+    /* Modal backdrop */
+    html.light .bg-black\/80[class*="fixed"] {
+      background-color: rgba(15, 23, 42, 0.6) !important;
+    }
+
+    /* Tech tags and badges */
+    html.light .text-accent-400.bg-accent-500\/10 {
+      color: #1d4ed8 !important;
+      background-color: rgba(37, 99, 235, 0.1) !important;
+    }
+
+    /* Button text colors - ensure contrast */
+    html.light .text-black {
+      color: #f8fafc !important;
+    }
+
+    /* Scrollbar styling for light mode */
+    html.light .scroll-container::-webkit-scrollbar-thumb {
+      background-color: rgba(148, 163, 184, 0.5);
+    }
+
+    html.light .scroll-container::-webkit-scrollbar-track {
+      background-color: rgba(148, 163, 184, 0.1);
     }
   </style>
   <script type="importmap">
